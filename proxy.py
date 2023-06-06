@@ -1,5 +1,5 @@
-import requests
 from flask import Flask, jsonify, request
+import requests
 
 app = Flask(__name__)
 
@@ -12,9 +12,10 @@ def get_data():
         return jsonify({"error": "No contract_number provided"}), 400
 
     # Make a GET request to the API
-    response = requests.get(f'https://testwebappmocc.azurewebsites.net/api?contract_number={contract_number}')
+    response = requests.get(f'http://localhost/api?contract_number={contract_number}')
+
     # Return the API's response
     return jsonify(response.json())
 
 if __name__ == '__main__':
-    app.run(port=8080)  # Runs the Proxy on localhost:7000
+    app.run(host='0.0.0.0', port=80)  # Runs the Proxy on all available network interfaces on port 80
